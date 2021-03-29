@@ -44,7 +44,7 @@ namespace PPE
 
         private void button_Event_Click(object sender, EventArgs e)
         {
-            //openChildForm(new WindowEvent());
+            openChildForm(new WindowEvenement());
         }
 
         private void button_Topics_Click(object sender, EventArgs e)

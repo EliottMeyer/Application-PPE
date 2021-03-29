@@ -104,7 +104,7 @@ namespace PPE
             this.button_Event.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.button_Event.Size = new System.Drawing.Size(200, 75);
             this.button_Event.TabIndex = 3;
-            this.button_Event.Text = "Evènements";
+            this.button_Event.Text = "Evénements";
             this.button_Event.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_Event.UseVisualStyleBackColor = true;
             this.button_Event.Click += new System.EventHandler(this.button_Event_Click);

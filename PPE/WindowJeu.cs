@@ -224,7 +224,6 @@ namespace PPE
             }  
         }
 
-
         private void button_clear_ID_Click(object sender, EventArgs e)
         {
             textBox_ID_jeu.ResetText();

@@ -26,3 +26,4 @@ C:\Users\Eliott\source\repos\PPE\PPE\obj\Debug\PPE.WindowUtilisateur.resources
 C:\Users\Eliott\source\repos\PPE\PPE\obj\Debug\PPE.WindowCommentaireFromJeu.resources
 C:\Users\Eliott\source\repos\PPE\PPE\obj\Debug\PPE.WindowTopic.resources
 C:\Users\Eliott\source\repos\PPE\PPE\obj\Debug\PPE.WindowCommentaireFromTopic.resources
+C:\Users\Eliott\source\repos\PPE\PPE\obj\Debug\PPE.WindowEvenement.resources
