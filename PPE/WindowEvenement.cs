@@ -185,5 +185,27 @@ namespace PPE
         {
             dateTimePicker_event.Value = DateTime.Today.AddDays(0);
         }
+
+        private void enable_Button(object sender, EventArgs e)
+        {
+            if (textBox_ID_event.TextLength != 0)
+            {
+                button_Add.Enabled = false;
+                button_Edit.Enabled = true;
+                button_Del.Enabled = true;
+            }
+            else
+            {
+                button_Add.Enabled = true;
+                button_Edit.Enabled = false;
+                button_Del.Enabled = false;
+            }
+
+            if (textBox_Name_event.TextLength == 0  || textBox_Img_event.TextLength == 0)
+            {
+                button_Add.Enabled = false;
+                button_Edit.Enabled = false;
+            }
+        }
     }
 }
