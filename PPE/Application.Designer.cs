@@ -37,7 +37,10 @@ namespace PPE
             this.button_Categories = new System.Windows.Forms.Button();
             this.panel = new System.Windows.Forms.Panel();
             this.panelChildForm = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label_Name = new System.Windows.Forms.Label();
             this.panelSideMenu.SuspendLayout();
+            this.panelChildForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSideMenu
@@ -88,6 +91,7 @@ namespace PPE
             this.button_Topic.Text = "Topics";
             this.button_Topic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_Topic.UseVisualStyleBackColor = true;
+            this.button_Topic.Click += new System.EventHandler(this.button_Topics_Click);
             // 
             // button_Event
             // 
@@ -104,6 +108,7 @@ namespace PPE
             this.button_Event.Text = "Evènements";
             this.button_Event.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_Event.UseVisualStyleBackColor = true;
+            this.button_Event.Click += new System.EventHandler(this.button_Event_Click);
             // 
             // button_Jeux
             // 
@@ -151,12 +156,38 @@ namespace PPE
             // panelChildForm
             // 
             this.panelChildForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panelChildForm.BackgroundImage = global::PPE.Properties.Resources.icon;
+            this.panelChildForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelChildForm.Controls.Add(this.label_Name);
+            this.panelChildForm.Controls.Add(this.panel1);
             this.panelChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelChildForm.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panelChildForm.Location = new System.Drawing.Point(200, 0);
             this.panelChildForm.Name = "panelChildForm";
             this.panelChildForm.Size = new System.Drawing.Size(982, 853);
             this.panelChildForm.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 753);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(982, 100);
+            this.panel1.TabIndex = 71;
+            // 
+            // label_Name
+            // 
+            this.label_Name.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label_Name.AutoSize = true;
+            this.label_Name.BackColor = System.Drawing.Color.Transparent;
+            this.label_Name.Font = new System.Drawing.Font("Segoe UI Symbol", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Name.ForeColor = System.Drawing.Color.White;
+            this.label_Name.Location = new System.Drawing.Point(48, 32);
+            this.label_Name.Name = "label_Name";
+            this.label_Name.Size = new System.Drawing.Size(818, 46);
+            this.label_Name.TabIndex = 72;
+            this.label_Name.Text = "Application d\'administration du site CENTERGAME";
             // 
             // Application
             // 
@@ -170,6 +201,8 @@ namespace PPE
             this.MinimumSize = new System.Drawing.Size(1122, 750);
             this.Name = "Application";
             this.panelSideMenu.ResumeLayout(false);
+            this.panelChildForm.ResumeLayout(false);
+            this.panelChildForm.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -184,5 +217,7 @@ namespace PPE
         private System.Windows.Forms.Button button_Categories;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Panel panelChildForm;
+        private System.Windows.Forms.Label label_Name;
+        private System.Windows.Forms.Panel panel1;
     }
 }

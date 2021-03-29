@@ -11,11 +11,11 @@ using MySql.Data.MySqlClient;
 
 namespace PPE
 {
-    public partial class WindowCommentaireFromJeu : Form
+    public partial class WindowCommentaireFromTopic : Form
     {
         private static MySqlConnection conn = new MySqlConnection("database=bdd_jeux_slam; server=localhost; port=3307; user id=root; pwd=");
 
-        public WindowCommentaireFromJeu(int id_item)
+        public WindowCommentaireFromTopic(int id_item)
         {
             InitializeComponent();
             dataGridView_Comments.DataSource = display_Comments_Table(id_item);
@@ -53,8 +53,8 @@ namespace PPE
             "FROM commentaires c " +
             "INNER JOIN user u ON u.id = c.id_user " +
             "LEFT JOIN like_dislike_comment ldc ON c.id_comm = ldc.id_comm AND ldc.type = 'like' " +
-            "LEFT JOIN like_dislike_comment ldc2 ON c.id_comm = ldc2.id_comm AND ldc2.type = 'dislike' " +
-            "WHERE c.id_jeu = @id_jeu " +
+            "LEFT JOIN like_dislike_comment ldc2 ON c.id_comm = ldc2.id_comm AND ldc2.type='dislike' " +
+            "WHERE c.id_jeu = 2 " +
             "GROUP BY c.id_comm";
             
             mydtadp_com.SelectCommand = cmd;

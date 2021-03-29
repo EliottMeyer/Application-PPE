@@ -71,6 +71,18 @@
     <Compile Include="Application.Designer.cs">
       <DependentUpon>Application.cs</DependentUpon>
     </Compile>
+    <Compile Include="WindowCommentaireFromTopic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowCommentaireFromTopic.Designer.cs">
+      <DependentUpon>WindowCommentaireFromTopic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowTopic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowTopic.Designer.cs">
+      <DependentUpon>WindowTopic.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowUtilisateur.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +115,9 @@
     <EmbeddedResource Include="WindowCategorie.resx">
       <DependentUpon>WindowCategorie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WindowCommentaireFromTopic.resx">
+      <DependentUpon>WindowCommentaireFromTopic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WindowCommentaireFromJeu.resx">
       <DependentUpon>WindowCommentaireFromJeu.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,7 +129,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="WindowTopic.resx">
+      <DependentUpon>WindowTopic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WindowJeu.resx">
       <DependentUpon>WindowJeu.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -42,6 +42,16 @@ namespace PPE
             openChildForm(new WindowJeu());
         }
 
+        private void button_Event_Click(object sender, EventArgs e)
+        {
+            //openChildForm(new WindowEvent());
+        }
+
+        private void button_Topics_Click(object sender, EventArgs e)
+        {
+            openChildForm(new WindowTopic());
+        }
+
         private void button_User_Click(object sender, EventArgs e)
         {
             openChildForm(new WindowUtilisateur());

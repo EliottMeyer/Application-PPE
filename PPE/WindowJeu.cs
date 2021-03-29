@@ -282,8 +282,13 @@ namespace PPE
 
         private void button_Commentaire_Click(object sender, EventArgs e)
         {
-            WindowCommentaireFromJeu Jeu_Comments = new WindowCommentaireFromJeu(Convert.ToInt32(textBox_ID_jeu.Text));
-            Jeu_Comments.Show();
+            int n;
+            bool isNumeric = int.TryParse(textBox_ID_jeu.Text, out n);
+            if (isNumeric == true)
+            {
+                WindowCommentaireFromJeu Jeu_Comments = new WindowCommentaireFromJeu(Convert.ToInt32(textBox_ID_jeu.Text));
+                Jeu_Comments.Show();
+            }
         }
     }
 }

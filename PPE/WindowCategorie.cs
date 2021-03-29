@@ -16,7 +16,6 @@ namespace PPE
 
         private static MySqlConnection conn = new MySqlConnection("database=bdd_jeux_slam; server=localhost; port=3307; user id=root; pwd=");
 
-
         public WindowCategorie()
         {
             InitializeComponent();
@@ -220,7 +219,6 @@ namespace PPE
             if (textBox_Name_categorie.TextLength == 0)
             {
                 button_Add.Enabled = false;
-                button_Edit.Enabled = false;
             }
         }
     }
