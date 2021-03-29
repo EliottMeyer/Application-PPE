@@ -26,10 +26,19 @@ namespace PPE
         {
             dataGridView_Topics_jeu.DataSource = display_Jeu_Table();
 
-            MySqlDataAdapter mydtadp = new MySqlDataAdapter();
-            DataTable table_topic = new DataTable();
-            mydtadp.SelectCommand = new MySqlCommand("SELECT id, name FROM jeux", conn);
-            mydtadp.Fill(table_topic);
+            MySqlCommand cmd = conn.CreateCommand();
+            MySqlDataAdapter mydtadp_jeu = new MySqlDataAdapter();
+            DataTable table_jeu = new DataTable();
+
+            cmd.CommandText = "SELECT name FROM jeux";
+            mydtadp_jeu.SelectCommand = cmd;
+
+            mydtadp_jeu.Fill(table_jeu);
+
+            for (int i = 0; i < table_jeu.Rows.Count; i++)
+            {
+                comboBox_Jeu_topic.Items.Add(table_jeu.Rows[i]["name"]);
+            }
 
             button_Edit.Enabled = false;
             button_Del.Enabled = false;
@@ -44,7 +53,8 @@ namespace PPE
 
             cmd.CommandText = "SELECT j.id, j.name, COUNT(t.name_jeu) AS topics " +
                 "FROM jeux j " +
-                "LEFT JOIN topic t ON j.name = t.name_jeu AND t.contenu =  ";
+                "LEFT JOIN topic t ON j.name = t.name_jeu " +
+                "GROUP BY j.name ";
             mydtadp_jeu.SelectCommand = cmd;
 
             mydtadp_jeu.Fill(table_jeu);
@@ -57,7 +67,7 @@ namespace PPE
             MySqlCommand cmd = conn.CreateCommand();
             MySqlDataAdapter mydtadp_topic = new MySqlDataAdapter();
             DataTable table_topic = new DataTable();
-            cmd.Parameters.AddWithValue("@id_jeu", comboBox_Jeu_topic.Text);
+            cmd.Parameters.AddWithValue("@jeu", comboBox_Jeu_topic.Text);
 
             cmd.CommandText = "SELECT * FROM topic WHERE name_jeu = @jeu";
             mydtadp_topic.SelectCommand = cmd;
@@ -69,31 +79,43 @@ namespace PPE
 
         private void dataGridView_Jeux_MouseUp(object sendere, MouseEventArgs ee)
         {
-            int row = dataGridView_Topics_sujet.CurrentCell.RowIndex;
-            int id_jeu = 0;
+            int row = dataGridView_Topics_jeu.CurrentCell.RowIndex;
 
             for (int i = 0; i < 3; i++)
             {
-                string val = dataGridView_Topics_sujet.Rows[row].Cells[i].Value.ToString();
+                string val = dataGridView_Topics_jeu.Rows[row].Cells[i].Value.ToString();
                 switch (i)
                 {
-                    case 0:
-                        textBox_ID_topic.Text = val;
-                        try
-                        {
-                            id_jeu = Convert.ToInt32(val);
-                        }
-                        catch { }
-                    break;
                     case 1:
                         comboBox_Jeu_topic.SelectedIndex = comboBox_Jeu_topic.FindStringExact(val);
                     break;
-                    case 2:
-                        textBox_Titre_topic.Text = val;
-                    break;
-                    case 3:
-                        textBox_Content_topic.Text = val;
-                    break;
+                }
+            }
+
+            dataGridView_Topics_sujet.DataSource = display_Topic_Table();
+        }
+
+        private void dataGridView_Topic_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (dataGridView_Topics_sujet.CurrentCell != null)
+            {
+                int row = dataGridView_Topics_sujet.CurrentCell.RowIndex;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    string val = dataGridView_Topics_sujet.Rows[row].Cells[i].Value.ToString();
+                    switch (i)
+                    {
+                        case 0:
+                            textBox_ID_topic.Text = val;
+                            break;
+                        case 2:
+                            textBox_Titre_topic.Text = val;
+                            break;
+                        case 3:
+                            textBox_Content_topic.Text = val;
+                            break;
+                    }
                 }
             }
         }
@@ -101,7 +123,7 @@ namespace PPE
         private void button_Edit_Click(object sender, EventArgs e)
         {
 
-            DialogResult dialogResult = MessageBox.Show("Etes-vous sur de vouloir modifier le jeu " + textBox_ID_topic.Text + " ?", "Modification de jeu", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Etes-vous sur de vouloir modifier le topic " + textBox_ID_topic.Text + " ?", "Modification de topic", MessageBoxButtons.YesNo);
 
             if (dialogResult == DialogResult.Yes)
             {
@@ -134,7 +156,7 @@ namespace PPE
         private void button_Del_Click(object sender, EventArgs e)
         {
 
-            DialogResult dialogResult = MessageBox.Show("Etes-vous sur de vouloir supprimer le jeu " + textBox_ID_topic.Text + " ?", "Suppression de jeu", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Etes-vous sur de vouloir supprimer le topic " + textBox_ID_topic.Text + " ?", "Suppression de topic", MessageBoxButtons.YesNo);
 
             if (dialogResult == DialogResult.Yes)
             { 
@@ -161,7 +183,6 @@ namespace PPE
             }  
         }
 
-
         private void button_clear_ID_Click(object sender, EventArgs e)
         {
             textBox_ID_topic.ResetText();
@@ -176,7 +197,6 @@ namespace PPE
         {
             textBox_Content_topic.ResetText();
         }
-
 
         private void enable_Button(object sender, EventArgs e)
         {

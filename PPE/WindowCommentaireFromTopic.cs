@@ -19,43 +19,43 @@ namespace PPE
         {
             InitializeComponent();
             dataGridView_Comments.DataSource = display_Comments_Table(id_item);
-            Globals.id_jeu = id_item;
+            Globals.id_topic = id_item;
             GiveNameToLabel(id_item);
         }
 
         public static class Globals
         {
-            public static Int32 id_jeu;
+            public static Int32 id_topic;
             public static Int32 id_reponse;
             public static Int32 id_commentaire;
         }
 
-        public void GiveNameToLabel(int id_jeu)
+        public void GiveNameToLabel(int id_topic)
         {
             conn.Open();
-            string query = "SELECT * FROM jeux WHERE id=" + id_jeu;
+            string query = "SELECT * FROM topic WHERE id=" + id_topic;
             var cmd = new MySql.Data.MySqlClient.MySqlCommand(query, conn);
             var reader = cmd.ExecuteReader();
             reader.Read();
-            label_Commentaire.Text = "Commentaires du jeu : " + reader.GetString("name");
+            label_Commentaire.Text = "Commentaires du topic : " + reader.GetString("titre");
             conn.Close();
         }
 
-        public DataTable display_Comments_Table(int id_jeu)
+        public DataTable display_Comments_Table(int id_topic)
         {
             MySqlCommand cmd = conn.CreateCommand();
             MySqlDataAdapter mydtadp_com = new MySqlDataAdapter(); // créé un objet pour remplir    
             DataTable table_com = new DataTable(); // créé un objet de table de données
 
-            cmd.Parameters.AddWithValue("@id_jeu", id_jeu);
+            cmd.Parameters.AddWithValue("@id_topic", id_topic);
 
-            cmd.CommandText = "SELECT c.id_comm, u.username, c.contenu, c.date_create, COUNT(ldc.id_comm) AS likes, COUNT(ldc2.id_comm) AS dislikes " +
-            "FROM commentaires c " +
-            "INNER JOIN user u ON u.id = c.id_user " +
-            "LEFT JOIN like_dislike_comment ldc ON c.id_comm = ldc.id_comm AND ldc.type = 'like' " +
-            "LEFT JOIN like_dislike_comment ldc2 ON c.id_comm = ldc2.id_comm AND ldc2.type='dislike' " +
-            "WHERE c.id_jeu = 2 " +
-            "GROUP BY c.id_comm";
+            cmd.CommandText = "SELECT tc.id_topic_comment, u.username, tc.contenu, tc.date_create, COUNT(ldtc.id_topic) AS likes, COUNT(ldtc2.id_topic) AS dislikes " +
+            "FROM topic_comment tc " +
+            "INNER JOIN user u ON u.id = tc.id_user " +
+            "LEFT JOIN like_dislike_topic_comment ldtc ON tc.id_topic_comment = ldtc.id_topic AND ldtc.type = 'like' " +
+            "LEFT JOIN like_dislike_topic_comment ldtc2 ON tc.id_topic_comment = ldtc2.id_topic AND ldtc2.type='dislike' " +
+            "WHERE tc.id_topic = @id_topic " +
+            "GROUP BY tc.id_topic_comment";
             
             mydtadp_com.SelectCommand = cmd;
             mydtadp_com.Fill(table_com); // rempli cette table par les données récupéré par la commande SQL
@@ -108,9 +108,9 @@ namespace PPE
 
             cmd.Parameters.AddWithValue("@id_comm", id_comm);      
 
-            cmd.CommandText = "SELECT rc.id, rc.contenu, rc.date_create, user.username AS username, user.id AS uid FROM reply_comment AS rc " +
-                "LEFT JOIN user ON rc.id_user = user.id " +
-                "WHERE rc.id_comment = @id_comm";
+            cmd.CommandText = "SELECT rtc.id, rtc.contenu, rtc.date_create, user.username AS username, user.id AS uid FROM reply_topic_comment AS rtc " +
+                "LEFT JOIN user ON rtc.id_user = user.id " +
+                "WHERE rtc.id_topic_comment = @id_comm";
 
             mydtadp_rep.SelectCommand = cmd;
             mydtadp_rep.Fill(table_rep); // rempli cette table par les données récupéré par la commande SQL            
@@ -137,7 +137,7 @@ namespace PPE
             MySqlCommand command = conn.CreateCommand();
             command.Parameters.AddWithValue("@id_reponse", dataGridView_Reponses.Rows[dataGridView_Reponses.CurrentCell.RowIndex].Cells[0].Value.ToString());
 
-            command.CommandText = "DELETE FROM reply_comment WHERE id = @id_reponse";
+            command.CommandText = "DELETE FROM reply_topic_comment WHERE id = @id_reponse";
 
             if (command.ExecuteNonQuery() > 0)
             {
@@ -159,9 +159,9 @@ namespace PPE
             MySqlCommand command = conn.CreateCommand();
             command.Parameters.AddWithValue("@id_comment", dataGridView_Comments.Rows[dataGridView_Comments.CurrentCell.RowIndex].Cells[0].Value.ToString());
 
-            command.CommandText = "DELETE FROM reply_comment WHERE id_comment = @id_comment";
+            command.CommandText = "DELETE FROM reply_topic_comment WHERE id_topic_comment = @id_comment";
             command.ExecuteNonQuery();
-            command.CommandText = "DELETE FROM commentaires WHERE id_comm = @id_comment";
+            command.CommandText = "DELETE FROM topic_comment WHERE id_topic_comment = @id_comment";
 
             if (command.ExecuteNonQuery() > 0)
             {
@@ -174,7 +174,7 @@ namespace PPE
 
             conn.Close();
 
-            dataGridView_Comments.DataSource = display_Comments_Table(Globals.id_jeu);
+            dataGridView_Comments.DataSource = display_Comments_Table(Globals.id_topic);
         }   
 
         private void button_Ban_Commentaire_Click(object sender, EventArgs e)
@@ -183,7 +183,27 @@ namespace PPE
             MySqlCommand command = conn.CreateCommand();
             command.Parameters.AddWithValue("@id_comm", dataGridView_Comments.Rows[dataGridView_Comments.CurrentCell.RowIndex].Cells[0].Value.ToString());
 
-            command.CommandText = "UPDATE user SET status = 'banned' WHERE id = (SELECT id_user FROM commentaires WHERE id_comment = @id_comm)";
+            command.CommandText = "UPDATE user SET status = 'banned' WHERE id = (SELECT id_user FROM topic_comment WHERE id_topic_comment = @id_comm)";
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                MessageBox.Show("L'utilisateur " + dataGridView_Comments.Rows[dataGridView_Comments.CurrentCell.RowIndex].Cells[1].Value.ToString() + " a été banni.");
+            }
+            else
+            {   
+                MessageBox.Show("Une erreur s'est produit !");
+            }
+
+            conn.Close();
+        }
+
+        private void button_Ban_Reponse_Click(object sender, EventArgs e)
+        {
+            conn.Open();
+            MySqlCommand command = conn.CreateCommand();
+            command.Parameters.AddWithValue("@id_comm", dataGridView_Reponses.Rows[dataGridView_Reponses.CurrentCell.RowIndex].Cells[0].Value.ToString());
+
+            command.CommandText = "UPDATE user SET status = 'banned' WHERE id = (SELECT id_user FROM reply_topic_comment WHERE id = @id_comm)";
 
             if (command.ExecuteNonQuery() > 0)
             {

@@ -54,7 +54,7 @@ namespace PPE
             "INNER JOIN user u ON u.id = c.id_user " +
             "LEFT JOIN like_dislike_comment ldc ON c.id_comm = ldc.id_comm AND ldc.type = 'like' " +
             "LEFT JOIN like_dislike_comment ldc2 ON c.id_comm = ldc2.id_comm AND ldc2.type = 'dislike' " +
-            "WHERE c.id_jeu = @id_jeu " +
+            "WHERE c.id_jeu = @id_jeu " +   
             "GROUP BY c.id_comm";
             
             mydtadp_com.SelectCommand = cmd;
@@ -82,7 +82,6 @@ namespace PPE
 
                 textBox_Username_Commentaire.Text = dataGridView_Comments.Rows[row].Cells[1].Value.ToString();
                 textBox_Comment_Content.Text = contenu; // on remplit la TEXTBOX de la valeur sauvegarder (ici l'ID)
-
 
                 try
                 {
@@ -183,7 +182,27 @@ namespace PPE
             MySqlCommand command = conn.CreateCommand();
             command.Parameters.AddWithValue("@id_comm", dataGridView_Comments.Rows[dataGridView_Comments.CurrentCell.RowIndex].Cells[0].Value.ToString());
 
-            command.CommandText = "UPDATE user SET status = 'banned' WHERE id = (SELECT id_user FROM commentaires WHERE id_comment = @id_comm)";
+            command.CommandText = "UPDATE user SET status = 'banned' WHERE id = (SELECT id_user FROM commentaires WHERE id_comm = @id_comm)";
+
+            if (command.ExecuteNonQuery() > 0)
+            {
+                MessageBox.Show("L'utilisateur " + dataGridView_Comments.Rows[dataGridView_Comments.CurrentCell.RowIndex].Cells[1].Value.ToString() + " a été banni.");
+            }
+            else
+            {
+                MessageBox.Show("Une erreur s'est produit !");
+            }
+
+            conn.Close();
+        }
+
+        private void button_Ban_Reponse_Click(object sender, EventArgs e)
+        {
+            conn.Open();
+            MySqlCommand command = conn.CreateCommand();
+            command.Parameters.AddWithValue("@id_comm", dataGridView_Reponses.Rows[dataGridView_Reponses.CurrentCell.RowIndex].Cells[0].Value.ToString());
+
+            command.CommandText = "UPDATE user SET status = 'banned' WHERE id = (SELECT id_user FROM reply_comment WHERE id = @id_comm)";
 
             if (command.ExecuteNonQuery() > 0)
             {
@@ -202,6 +221,7 @@ namespace PPE
             Del_Reponse.Enabled = true;
             button_Ban_Reponse.Enabled = true;
         }
+
     }
 
 }

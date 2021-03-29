@@ -164,7 +164,7 @@ namespace PPE
             this.dataGridView_Comments.AllowUserToAddRows = false;
             this.dataGridView_Comments.AllowUserToDeleteRows = false;
             this.dataGridView_Comments.AllowUserToResizeRows = false;
-            this.dataGridView_Comments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView_Comments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_Comments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Comments.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -224,8 +224,8 @@ namespace PPE
             this.dataGridView_Reponses.AllowUserToAddRows = false;
             this.dataGridView_Reponses.AllowUserToDeleteRows = false;
             this.dataGridView_Reponses.AllowUserToResizeRows = false;
-            this.dataGridView_Reponses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView_Reponses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_Reponses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Reponses.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -344,7 +344,7 @@ namespace PPE
             this.button_Ban_Reponse.TabIndex = 64;
             this.button_Ban_Reponse.Text = "Bannir l\'utilisateur";
             this.button_Ban_Reponse.UseVisualStyleBackColor = false;
-            this.button_Ban_Reponse.Click += new System.EventHandler(this.button_Ban_Commentaire_Click);
+            this.button_Ban_Reponse.Click += new System.EventHandler(this.button_Ban_Reponse_Click);
             // 
             // label_Username_Reponse
             // 
@@ -369,7 +369,7 @@ namespace PPE
             this.textBox_Username_Reponse.Size = new System.Drawing.Size(168, 25);
             this.textBox_Username_Reponse.TabIndex = 62;
             // 
-            // WindowCommentaireFromJeu
+            // WindowCommentaireFromTopic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -391,7 +391,7 @@ namespace PPE
             this.Controls.Add(this.label_Comment_Content);
             this.Controls.Add(this.textBox_Comment_Content);
             this.Controls.Add(this.Del_Comment);
-            this.Name = "WindowCommentaireFromJeu";
+            this.Name = "WindowCommentaireFromTopic";
             this.Text = "Commentaires";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Comments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Reponses)).EndInit();

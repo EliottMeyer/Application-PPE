@@ -52,7 +52,6 @@ namespace PPE
             this.button_Commentaire = new System.Windows.Forms.Button();
             this.button_Del = new System.Windows.Forms.Button();
             this.button_Edit = new System.Windows.Forms.Button();
-            this.button_Add = new System.Windows.Forms.Button();
             this.comboBox_Jeu_topic = new System.Windows.Forms.ComboBox();
             this.label_jeu_topic = new System.Windows.Forms.Label();
             this.dataGridView_Topics_jeu = new System.Windows.Forms.DataGridView();
@@ -222,7 +221,7 @@ namespace PPE
             this.dataGridView_Topics_sujet.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView_Topics_sujet.EnableHeadersVisualStyles = false;
             this.dataGridView_Topics_sujet.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
-            this.dataGridView_Topics_sujet.Location = new System.Drawing.Point(419, 135);
+            this.dataGridView_Topics_sujet.Location = new System.Drawing.Point(419, 83);
             this.dataGridView_Topics_sujet.MultiSelect = false;
             this.dataGridView_Topics_sujet.Name = "dataGridView_Topics_sujet";
             this.dataGridView_Topics_sujet.ReadOnly = true;
@@ -248,9 +247,9 @@ namespace PPE
             this.dataGridView_Topics_sujet.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView_Topics_sujet.RowTemplate.Height = 24;
             this.dataGridView_Topics_sujet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Topics_sujet.Size = new System.Drawing.Size(533, 359);
+            this.dataGridView_Topics_sujet.Size = new System.Drawing.Size(533, 411);
             this.dataGridView_Topics_sujet.TabIndex = 55;
-            this.dataGridView_Topics_sujet.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView_Jeux_MouseUp);
+            this.dataGridView_Topics_sujet.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView_Topic_MouseUp);
             // 
             // panel1
             // 
@@ -258,7 +257,6 @@ namespace PPE
             this.panel1.Controls.Add(this.button_Commentaire);
             this.panel1.Controls.Add(this.button_Del);
             this.panel1.Controls.Add(this.button_Edit);
-            this.panel1.Controls.Add(this.button_Add);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 753);
             this.panel1.Name = "panel1";
@@ -287,11 +285,11 @@ namespace PPE
             this.button_Del.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Del.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_Del.ForeColor = System.Drawing.Color.White;
-            this.button_Del.Location = new System.Drawing.Point(463, 13);
+            this.button_Del.Location = new System.Drawing.Point(338, 13);
             this.button_Del.Name = "button_Del";
             this.button_Del.Size = new System.Drawing.Size(200, 75);
             this.button_Del.TabIndex = 5;
-            this.button_Del.Text = "Supprimer le jeu";
+            this.button_Del.Text = "Supprimer le topic";
             this.button_Del.UseVisualStyleBackColor = false;
             this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
             // 
@@ -302,27 +300,13 @@ namespace PPE
             this.button_Edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_Edit.ForeColor = System.Drawing.Color.White;
-            this.button_Edit.Location = new System.Drawing.Point(248, 13);
+            this.button_Edit.Location = new System.Drawing.Point(123, 13);
             this.button_Edit.Name = "button_Edit";
             this.button_Edit.Size = new System.Drawing.Size(200, 75);
             this.button_Edit.TabIndex = 4;
-            this.button_Edit.Text = "Modifier le jeu";
+            this.button_Edit.Text = "Modifier le topic";
             this.button_Edit.UseVisualStyleBackColor = false;
             this.button_Edit.Click += new System.EventHandler(this.button_Edit_Click);
-            // 
-            // button_Add
-            // 
-            this.button_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_Add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
-            this.button_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Add.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Add.ForeColor = System.Drawing.Color.White;
-            this.button_Add.Location = new System.Drawing.Point(31, 13);
-            this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(200, 75);
-            this.button_Add.TabIndex = 3;
-            this.button_Add.Text = "Ajouter un jeu";
-            this.button_Add.UseVisualStyleBackColor = false;
             // 
             // comboBox_Jeu_topic
             // 
@@ -333,11 +317,6 @@ namespace PPE
             this.comboBox_Jeu_topic.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox_Jeu_topic.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Jeu_topic.FormattingEnabled = true;
-            this.comboBox_Jeu_topic.Items.AddRange(new object[] {
-            "user",
-            "admin",
-            "disable",
-            "banned"});
             this.comboBox_Jeu_topic.Location = new System.Drawing.Point(117, 546);
             this.comboBox_Jeu_topic.Name = "comboBox_Jeu_topic";
             this.comboBox_Jeu_topic.Size = new System.Drawing.Size(185, 26);
@@ -361,9 +340,8 @@ namespace PPE
             this.dataGridView_Topics_jeu.AllowUserToAddRows = false;
             this.dataGridView_Topics_jeu.AllowUserToDeleteRows = false;
             this.dataGridView_Topics_jeu.AllowUserToResizeRows = false;
-            this.dataGridView_Topics_jeu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView_Topics_jeu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView_Topics_jeu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_Topics_jeu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView_Topics_jeu.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
@@ -387,7 +365,7 @@ namespace PPE
             this.dataGridView_Topics_jeu.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridView_Topics_jeu.EnableHeadersVisualStyles = false;
             this.dataGridView_Topics_jeu.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
-            this.dataGridView_Topics_jeu.Location = new System.Drawing.Point(32, 135);
+            this.dataGridView_Topics_jeu.Location = new System.Drawing.Point(32, 83);
             this.dataGridView_Topics_jeu.MultiSelect = false;
             this.dataGridView_Topics_jeu.Name = "dataGridView_Topics_jeu";
             this.dataGridView_Topics_jeu.ReadOnly = true;
@@ -413,15 +391,14 @@ namespace PPE
             this.dataGridView_Topics_jeu.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridView_Topics_jeu.RowTemplate.Height = 24;
             this.dataGridView_Topics_jeu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Topics_jeu.Size = new System.Drawing.Size(344, 359);
+            this.dataGridView_Topics_jeu.Size = new System.Drawing.Size(358, 411);
             this.dataGridView_Topics_jeu.TabIndex = 60;
+            this.dataGridView_Topics_jeu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView_Jeux_MouseUp);
             // 
             // label_liste_jeux
             // 
-            this.label_liste_jeux.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label_liste_jeux.AutoSize = true;
-            this.label_liste_jeux.Location = new System.Drawing.Point(154, 115);
+            this.label_liste_jeux.Location = new System.Drawing.Point(157, 63);
             this.label_liste_jeux.Name = "label_liste_jeux";
             this.label_liste_jeux.Size = new System.Drawing.Size(94, 17);
             this.label_liste_jeux.TabIndex = 61;
@@ -430,10 +407,9 @@ namespace PPE
             // 
             // label_liste_sujet
             // 
-            this.label_liste_sujet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_liste_sujet.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label_liste_sujet.AutoSize = true;
-            this.label_liste_sujet.Location = new System.Drawing.Point(653, 115);
+            this.label_liste_sujet.Location = new System.Drawing.Point(639, 63);
             this.label_liste_sujet.Name = "label_liste_sujet";
             this.label_liste_sujet.Size = new System.Drawing.Size(106, 17);
             this.label_liste_sujet.TabIndex = 62;
@@ -489,7 +465,6 @@ namespace PPE
         private System.Windows.Forms.Button button_Commentaire;
         private System.Windows.Forms.Button button_Del;
         private System.Windows.Forms.Button button_Edit;
-        private System.Windows.Forms.Button button_Add;
         private System.Windows.Forms.ComboBox comboBox_Jeu_topic;
         private System.Windows.Forms.Label label_jeu_topic;
         private System.Windows.Forms.DataGridView dataGridView_Topics_jeu;

@@ -72,10 +72,10 @@ namespace PPE
                 {
                     case 0: // pour la premiere cellule 
                         textBox_ID_categorie.Text = val; // on remplit la TEXTBOX de la valeur sauvegarder (ici l'ID)
-                        break;
+                    break;
                     case 1: // pour la seconde cellule 
                         textBox_Name_categorie.Text = val; // on remplit la TEXTBOX de la valeur sauvegarder (ici le nom)
-                        break;
+                    break;
                 }
             }
         }

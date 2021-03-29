@@ -344,7 +344,7 @@ namespace PPE
             this.button_Ban_Reponse.TabIndex = 64;
             this.button_Ban_Reponse.Text = "Bannir l\'utilisateur";
             this.button_Ban_Reponse.UseVisualStyleBackColor = false;
-            this.button_Ban_Reponse.Click += new System.EventHandler(this.button_Ban_Commentaire_Click);
+            this.button_Ban_Reponse.Click += new System.EventHandler(this.button_Ban_Reponse_Click);
             // 
             // label_Username_Reponse
             // 
